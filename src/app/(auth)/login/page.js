@@ -1,12 +1,12 @@
-"use client";
-import Error from "@/Components/reuseable common Components/Error";
-import { useLoginMutation } from "@/Redux/features/auth/authApi";
-import { useState } from "react";
+'use client';
+import Error from '@/Components/reuseable common Components/Error';
+import { useLoginMutation } from '@/Redux/features/auth/authApi';
+import { useState } from 'react';
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const [
     login,
@@ -18,7 +18,7 @@ export default function Login() {
 
     // console.log("email = ", email);
     // console.log("password = ", password);
-    setError("");
+    setError('');
 
     login({
       email,

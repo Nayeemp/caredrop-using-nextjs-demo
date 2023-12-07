@@ -1,7 +1,5 @@
-/* eslint-disable max-len */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/prefer-default-export */
+'use client';
+
 import { apiSlice } from '../api/apiSlice';
 
 const apiWithTag = apiSlice.enhanceEndpoints({

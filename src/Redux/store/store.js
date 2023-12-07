@@ -1,8 +1,9 @@
-/* eslint-disable import/prefer-default-export */
-import { configureStore } from "@reduxjs/toolkit";
-import ButtonReducer from "../features/Button/ButtonSlice";
-import { apiSlice } from "../features/api/apiSlice";
-import authSliceReducer from "../features/auth/authSlice";
+'use client';
+
+import { configureStore } from '@reduxjs/toolkit';
+import ButtonReducer from '../features/Button/ButtonSlice';
+import { apiSlice } from '../features/api/apiSlice';
+import authSliceReducer from '../features/auth/authSlice';
 
 export const makeStore = () => {
   return configureStore({
@@ -15,6 +16,6 @@ export const makeStore = () => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(apiSlice.middleware),
 
-    devTools: process.env.NODE_ENV !== "production",
+    devTools: process.env.NODE_ENV !== 'production',
   });
 };

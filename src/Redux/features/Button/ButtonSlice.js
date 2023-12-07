@@ -1,21 +1,20 @@
-/* eslint-disable no-param-reassign */
+'use client';
+
 const { createSlice } = require('@reduxjs/toolkit');
 
 const initialState = {
-  value : 1
+  value: 1,
 };
 
 const ButtonSlice = createSlice({
   name: 'Button',
   initialState,
-  reducers:{
-    incrementByOne :(state, action)=>{
+  reducers: {
+    incrementByOne: (state, action) => {
       state.value = state.value + 1;
     },
-
   },
-
-})
+});
 
 export const { incrementByOne } = ButtonSlice.actions;
 export default ButtonSlice.reducer;

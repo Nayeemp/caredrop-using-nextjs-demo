@@ -1,15 +1,15 @@
-/* eslint-disable no-param-reassign */
-import { createSlice } from "@reduxjs/toolkit";
+'use client';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   accessToken: undefined,
-  loginMessageStatus: "",
-  logOutMessageStatus: "",
-  signUpMessageStatus: "",
+  loginMessageStatus: '',
+  logOutMessageStatus: '',
+  signUpMessageStatus: '',
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     userLoggedIn: (state, action) => {
@@ -18,20 +18,20 @@ const authSlice = createSlice({
     },
 
     addLoginMessageStatus: (state, action) => {
-      state.loginMessageStatus = "pending";
+      state.loginMessageStatus = 'pending';
     },
 
     userLoggedOut: (state) => {
       state.accessToken = undefined;
-      state.logOutMessageStatus = "pending";
+      state.logOutMessageStatus = 'pending';
     },
 
     clearLoginMessage: (state) => {
-      state.loginMessageStatus = "";
+      state.loginMessageStatus = '';
     },
 
     clearLogOutMessage: (state) => {
-      state.logOutMessageStatus = "";
+      state.logOutMessageStatus = '';
     },
   },
 });
