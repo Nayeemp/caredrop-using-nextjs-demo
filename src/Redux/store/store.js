@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { configureStore } from '@reduxjs/toolkit';
-import ButtonReducer from '../features/Button/ButtonSlice';
-import { apiSlice } from '../features/api/apiSlice';
-import authSliceReducer from '../features/auth/authSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import ButtonReducer from "../features/Button/ButtonSlice";
+import { apiSlice } from "../features/api/apiSlice";
+import authSliceReducer from "../features/auth/authSlice";
 
 export const makeStore = () => {
   return configureStore({
-    [apiSlice.reducerPath]: apiSlice.reducer,
     reducer: {
+      [apiSlice.reducerPath]: apiSlice.reducer,
       Button: ButtonReducer,
       auth: authSliceReducer,
     },
@@ -16,6 +16,6 @@ export const makeStore = () => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(apiSlice.middleware),
 
-    devTools: process.env.NODE_ENV !== 'production',
+    devTools: process.env.NODE_ENV !== "production",
   });
 };
