@@ -1,10 +1,17 @@
 "use client";
 
+import useLocalPropertiesCheck from "@/Hook/useLocalPropertiesCheck";
+import { useLogoutMutation } from "@/Redux/features/auth/authApi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function Navbar() {
+  const localPropertiesChecked = useLocalPropertiesCheck();
+  const { accessToken } = useSelector((state) => state.auth);
+  const [logout, { isSuccess, isLoading }] = useLogoutMutation();
+
   const pathname = usePathname();
   // console.log("pathname = ", pathname);
 
@@ -50,18 +57,25 @@ function Navbar() {
         My blogs
       </Link>
 
-      <Link
-        href="/login"
-        className={`py-3 px-5 hover:bg-gray-300 cursor-pointer border-x ${
-          pathname === "/login" && "bg-green-400"
-        }`}
-      >
-        Login
-      </Link>
+      {!accessToken && (
+        <Link
+          href="/login"
+          className={`py-3 px-5 hover:bg-gray-300 cursor-pointer border-x ${
+            pathname === "/login" && "bg-green-400"
+          }`}
+        >
+          Login
+        </Link>
+      )}
 
-      <div className="py-3 px-5 hover:bg-gray-300 cursor-pointer border-x">
-        Log Out
-      </div>
+      {accessToken && (
+        <div
+          className="py-3 px-5 hover:bg-gray-300 cursor-pointer border-x"
+          onClick={() => !isLoading && logout()}
+        >
+          Log Out
+        </div>
+      )}
     </header>
   );
 }

@@ -10,6 +10,7 @@ import "react-quill/dist/quill.snow.css";
 import imagePlaceHolder from "../../../public/Assets/Components/CreateArticles/image_placeHolder.png";
 import CreateArticlesFromTitle from "./CreateArticlesFromTitle";
 import Image from "next/image";
+import { useCreateArticlesPageCreateArticleMutation } from "@/Redux/features/CreateArticlesPage/CreateArticlesPageApi";
 
 const modules = {
   toolbar: [
@@ -40,6 +41,11 @@ function CreateArticles() {
   const [coverImage, setCoverImage] = useState("");
   const [textEditorValue, setTextEditorValue] = useState("");
   // const [successMsg, setSuccessMsg] = useState(false)
+
+  const { data: categoryData } = useBlogCategoryQuery();
+
+  const [createArticle, { isLoading, isError, isSuccess, data, error }] =
+    useCreateArticlesPageCreateArticleMutation();
 
   const clearFrom = () => {
     setTitle("");
@@ -83,7 +89,30 @@ function CreateArticles() {
     console.log("topic = ", topic);
     console.log("keywords= ", keywords);
     console.log("coverImage= ", coverImage);
-    clearFrom();
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", textEditorValue);
+    formData.append("category", topic);
+
+    const keywordsArray = keywords.split(",");
+    // console.log('keywordsArray ', keywordsArray);
+    for (let i = 0; i < keywordsArray.length; i++) {
+      // console.log(`keywordsArray[${i}] ${keywordsArray[i]}`)
+
+      if (keywordsArray[i].trim().length) {
+        // console.log(`keywordsArray[${i}] ${keywordsArray[i]}`)
+        // console.log(`keywordsArray[${i}] ${keywordsArray[i].length}`)
+
+        if (keywordsArray[i].length > 15) {
+          return alert("Keywords exceed 15 characters");
+        }
+        formData.append("keywords", keywordsArray[i]);
+      }
+    }
+
+    formData.append("post_image", coverImage);
+    createArticle(formData);
   };
 
   return (
@@ -130,11 +159,13 @@ function CreateArticles() {
                 onChange={(e) => setTopic(e.target.value)}
                 required
               >
-                <option value="">Select topics</option>
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option>
+                {categoryData
+                  ? categoryData.map((tagItem) => (
+                      <option value={`${[tagItem.id]}`} key={tagItem.id}>
+                        {tagItem.name}
+                      </option>
+                    ))
+                  : null}
               </select>
             </div>
           </div>
@@ -175,6 +206,7 @@ function CreateArticles() {
                 onChange={(e) => setKeywords(e.target.value)}
                 className="h-full w-full bg-[#F5F5F5] text-[#757575] text-sm md:text-base lg:text-xl font-normal leading-[23.87px] p-5 rounded-lg"
                 required
+                disabled={isLoading}
               />
             </div>
           </div>

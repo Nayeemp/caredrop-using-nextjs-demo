@@ -1,12 +1,17 @@
-'use client';
-import Error from '@/Components/reuseable common Components/Error';
-import { useLoginMutation } from '@/Redux/features/auth/authApi';
-import { useState } from 'react';
+"use client";
+import Error from "@/Components/reuseable common Components/Error";
+import { useLoginMutation } from "@/Redux/features/auth/authApi";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const router = useRouter();
+  const { accessToken } = useSelector((state) => state.auth);
 
   const [
     login,
@@ -18,14 +23,18 @@ export default function Login() {
 
     // console.log("email = ", email);
     // console.log("password = ", password);
-    setError('');
+    setError("");
 
     login({
       email,
       password,
     });
   };
-  console.log(isLoading, isError, isSuccess, data, loginResponseError);
+
+  // console.log(isLoading, isError, isSuccess, data, loginResponseError);
+  if (isSuccess || accessToken) {
+    router.replace("/");
+  }
   return (
     <div className="container">
       <div className="flex flex-col justify-center py-[120px] sm:px-6 lg:px-8 px-6">

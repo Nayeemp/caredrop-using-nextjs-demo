@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/Components/Navbar/Navbar";
 import StoreProvider from "@/Redux/provider/StoreProvider.js";
+import useLocalPropertiesCheck from "@/Hook/useLocalPropertiesCheck";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,10 +15,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en-US">
       <body className={inter.className}>
-        <div>
+        <StoreProvider>
           <Navbar />
-        </div>
-        <StoreProvider>{children}</StoreProvider>
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );
