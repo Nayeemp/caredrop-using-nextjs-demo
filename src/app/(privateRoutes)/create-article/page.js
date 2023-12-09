@@ -8,6 +8,6 @@ export default function CreateArticle() {
   return access_token?.value ? (
     <CreateArticles />
   ) : (
-    <div className="container">you don't have access</div>
+    <div className="container">you do not have access</div>
   );
 }

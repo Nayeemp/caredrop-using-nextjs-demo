@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
-import MyBlogs from "./MyBlogs";
 import PrivateRoute from "@/helpers/PrivateRoute";
+import MyProfile from "./MyProfile";
 
 export default function Home() {
   const cookieStore = cookies();
@@ -10,8 +10,8 @@ export default function Home() {
   return access_token?.value ? (
     <>
       <div className="container">
-        <div>Your Blogs are</div>
-        <MyBlogs />
+        <div>Your Profile</div>
+        <MyProfile></MyProfile>
         <PrivateRoute />
       </div>
     </>

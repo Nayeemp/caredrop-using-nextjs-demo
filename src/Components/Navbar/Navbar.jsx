@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import UserIcon from "./account/UserIcon";
 
 function Navbar() {
   const localPropertiesChecked = useLocalPropertiesCheck();
@@ -23,7 +24,7 @@ function Navbar() {
   };
 
   const pathname = usePathname();
-  console.log("pathname = ", pathname);
+  //console.log("pathname = ", pathname);
 
   // useEffect(() => {
   //   console.log("mounting");
@@ -58,14 +59,16 @@ function Navbar() {
         Create Article
       </div>
 
-      <div
-        onClick={() => navigate("/my-blogs")}
-        className={`py-3 px-5 hover:bg-gray-300 cursor-pointer border-x ${
-          pathname === "/my-blogs" && "bg-green-400"
-        }`}
-      >
-        My blogs
-      </div>
+      {accessToken && (
+        <div
+          onClick={() => navigate("/my-blogs")}
+          className={`py-3 px-5 hover:bg-gray-300 cursor-pointer border-x ${
+            pathname === "/my-blogs" && "bg-green-400"
+          }`}
+        >
+          My blogs
+        </div>
+      )}
 
       {!accessToken && (
         <Link
@@ -78,7 +81,7 @@ function Navbar() {
         </Link>
       )}
 
-      {accessToken && (
+      {/* {accessToken && (
         <div
           className="py-3 px-5 hover:bg-gray-300 cursor-pointer border-x"
           onClick={() => !isLoading && logout()}
@@ -86,7 +89,9 @@ function Navbar() {
         >
           Log Out
         </div>
-      )}
+      )} */}
+
+      {accessToken && <UserIcon />}
     </header>
   );
 }

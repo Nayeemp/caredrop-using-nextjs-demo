@@ -10,7 +10,7 @@ const PopularArticles = () => {
     { refetchOnMountOrArgChange: true }
   );
 
-  console.log(isLoading, isSuccess, data);
+  //console.log(isLoading, isSuccess, data);
 
   if (isLoading) {
     return (

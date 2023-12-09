@@ -18,7 +18,7 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: async (args, api, extraOptions) => {
     let results = await baseQuery(args, api, extraOptions);
-    console.log("results = ", results);
+    //console.log("results = ", results);
 
     if (results?.error?.status === 401) {
       // console.log("results.error.status = ",results.error.status);
