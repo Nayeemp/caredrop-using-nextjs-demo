@@ -1,13 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
-import { apiSlice } from "../api/apiSlice";
+import { getUpdatedMyBlogList } from '@/Actions/CreateArticlesPageActions';
+import { apiSlice } from '../api/apiSlice';
 
 export const CreateArticlesPageApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     CreateArticlesPageCreateArticle: builder.mutation({
       query: (data) => ({
-        url: "/blog/create-blog/",
-        method: "POST",
+        url: '/blog/create-blog/',
+        method: 'POST',
         body: data,
         formData: true,
       }),
@@ -15,6 +16,7 @@ export const CreateArticlesPageApi = apiSlice.injectEndpoints({
         try {
           // console.log('inside createArticleApi arg = ', arg);
           const result = await queryFulfilled;
+          getUpdatedMyBlogList();
           // console.log('inside createArticleApi  result = ', result);
         } catch (error) {
           // console.log('inside createArticleApi  result = ', error);
@@ -23,7 +25,7 @@ export const CreateArticlesPageApi = apiSlice.injectEndpoints({
     }),
 
     blogCategory: builder.query({
-      query: () => ({ url: "/blog/category/" }),
+      query: () => ({ url: '/blog/category/' }),
     }),
   }),
 });

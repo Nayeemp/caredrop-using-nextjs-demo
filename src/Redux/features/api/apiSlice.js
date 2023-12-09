@@ -20,6 +20,19 @@ export const apiSlice = createApi({
     let results = await baseQuery(args, api, extraOptions);
     console.log('results = ', results);
 
+    if (results?.error?.status === 401) {
+      // console.log("results.error.status = ",results.error.status);
+      const accessToken = api.getState()?.auth?.accessToken;
+      // console.log("accessToken = ", accessToken);
+      if (accessToken) {
+        api.dispatch(cleraMyProfileInfo());
+        api.dispatch(userLoggedOut());
+        api.dispatch(clearLogOutMessage());
+        localStorage.clear();
+        api.dispatch(apiSlice.util.resetApiState());
+      }
+    }
+
     return results;
   },
   endpoints: () => ({}),

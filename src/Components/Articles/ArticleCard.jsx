@@ -47,11 +47,8 @@ const cardDetailsTagHandler = (categoryTags) => {
 
 function ArticleCard({ cardDetails }) {
   const { author } = cardDetails;
-  // console.log('articlesId = ', articlesId);
-  // console.log('userId  = ', userId);
 
   const isBookMarked = false;
-  // console.log('isBookMarked  = ', isBookMarked);
 
   const saveHandler = () => {
     //console.log('Inside saveHandler');
@@ -100,8 +97,13 @@ function ArticleCard({ cardDetails }) {
             <div className="flex items-center">
               <div>
                 {author?.photo ? (
-                  <div className="w-[32px] h-[32px] sm:w-[40px] sm:h-[40px] rounded-full authorPhoto object-cover relative">
-                    <Image fill src={author?.photo} alt="author" />
+                  <div className="w-[32px] h-[32px] sm:w-[40px] sm:h-[40px] authorPhoto relative">
+                    <Image
+                      fill
+                      src={author?.photo}
+                      alt="author"
+                      className="rounded-full object-cover"
+                    />
                   </div>
                 ) : (
                   <div className="bg-primary articleCardAuthorProfilePictureContainer">

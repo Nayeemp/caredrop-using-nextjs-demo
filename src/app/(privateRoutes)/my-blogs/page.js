@@ -1,18 +1,19 @@
-import { cookies } from "next/headers";
-import MyBlogs from "./MyBlogs";
+import { cookies } from 'next/headers';
+import MyBlogs from './MyBlogs';
 
 export default function Home() {
   const cookieStore = cookies();
-  const access_token = cookieStore.get("access_token");
-  // console.log("access_token = ", access_token);
-  console.log("access_token = ", access_token.value);
+  const access_token = cookieStore.get('access_token');
+  // console.log('access_token = ', access_token.value);
 
-  return (
+  return access_token?.value ? (
     <>
       <div className="container">
-        <div>This is my-blogs page</div>
+        <div>Your Blogs are</div>
         <MyBlogs />
       </div>
     </>
+  ) : (
+    <div className="container">you don't have access</div>
   );
 }

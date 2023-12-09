@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import useLocalPropertiesCheck from "@/Hook/useLocalPropertiesCheck";
-import { useLogoutMutation } from "@/Redux/features/auth/authApi";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import useLocalPropertiesCheck from '@/Hook/useLocalPropertiesCheck';
+import { useLogoutMutation } from '@/Redux/features/auth/authApi';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 function Navbar() {
   const localPropertiesChecked = useLocalPropertiesCheck();
@@ -24,7 +24,7 @@ function Navbar() {
       <Link
         href="/"
         className={`py-3 px-5 hover:bg-gray-300 cursor-pointer border-x ${
-          pathname === "/" && "bg-green-400"
+          pathname === '/' && 'bg-green-400'
         }`}
       >
         Home
@@ -33,7 +33,7 @@ function Navbar() {
       <Link
         href="/articles"
         className={`py-3 px-5 hover:bg-gray-300 cursor-pointer border-x ${
-          pathname === "/articles" && "bg-green-400"
+          pathname === '/articles' && 'bg-green-400'
         }`}
       >
         Articles
@@ -42,7 +42,7 @@ function Navbar() {
       <Link
         href="/create-article"
         className={`py-3 px-5 hover:bg-gray-300 cursor-pointer border-x ${
-          pathname === "/create-article" && "bg-green-400"
+          pathname === '/create-article' && 'bg-green-400'
         }`}
       >
         Create Article
@@ -51,7 +51,7 @@ function Navbar() {
       <Link
         href="/my-blogs"
         className={`py-3 px-5 hover:bg-gray-300 cursor-pointer border-x ${
-          pathname === "/my-blogs" && "bg-green-400"
+          pathname === '/my-blogs' && 'bg-green-400'
         }`}
       >
         My blogs
@@ -61,7 +61,7 @@ function Navbar() {
         <Link
           href="/login"
           className={`py-3 px-5 hover:bg-gray-300 cursor-pointer border-x ${
-            pathname === "/login" && "bg-green-400"
+            pathname === '/login' && 'bg-green-400'
           }`}
         >
           Login
@@ -72,6 +72,7 @@ function Navbar() {
         <div
           className="py-3 px-5 hover:bg-gray-300 cursor-pointer border-x"
           onClick={() => !isLoading && logout()}
+          // onClick={() => localStorage.clear()}
         >
           Log Out
         </div>

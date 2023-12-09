@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { userLoggedIn } from "../Redux/features/auth/authSlice";
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { userLoggedIn } from '../Redux/features/auth/authSlice';
 
 function useLocalPropertiesCheck() {
   const [propertiesChecked, setPropertieshChecked] = useState(false);
@@ -10,7 +10,7 @@ function useLocalPropertiesCheck() {
 
   useEffect(() => {
     // Checking user was logged in or not
-    const localAuth = localStorage.getItem("auth");
+    const localAuth = localStorage.getItem('auth');
     // console.log('localAuth = ', localAuth);
 
     if (localAuth) {
@@ -22,6 +22,8 @@ function useLocalPropertiesCheck() {
             access_token: auth.access_token,
           })
         );
+
+        document.cookie = `access_token = ${auth.access_token}`;
       }
     }
 
