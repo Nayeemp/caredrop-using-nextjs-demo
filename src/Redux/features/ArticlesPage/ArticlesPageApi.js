@@ -1,88 +1,26 @@
-'use client';
+"use client";
 
-import { apiSlice } from '../api/apiSlice';
+import { apiSlice } from "../api/apiSlice";
 
-const apiWithTag = apiSlice.enhanceEndpoints({
-  addTagTypes: ['ArticlesPageAllArticles'],
-});
-export const ArticlesPageApi = apiWithTag.injectEndpoints({
+export const ArticlesPageApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    articlesPageGetTopics: builder.query({
-      query: (data) => ({ url: '/blog/category/' }),
-    }),
-
-    articlesPageFilterArticles: builder.query({
-      query: (selectedTopic) => {
-        // console.log('selectedTopic = ', selectedTopic);
-        if (selectedTopic.name === 'All') {
-          return { url: '/blog/blog-list/?limit=5&offset=0' };
-        }
-
-        return {
-          url: `/blog/blog-list/?limit=5&offset=0&category=${selectedTopic.id}`,
-        };
-      },
-    }),
-
-    articlesPageGetMoreFilterArticles: builder.query({
-      query: ({ selectedTopic, limit, offset }) => {
-        // console.log('selectedTopic = ', selectedTopic);
-        if (selectedTopic.name === 'All') {
-          return { url: `/blog/blog-list/?limit=${limit}&offset=${offset}` };
-        }
-
-        return {
-          url: `/blog/blog-list/?limit=${limit}&offset=${offset}&category=${selectedTopic.id}`,
-        };
-      },
-
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          // console.log('inside getMoreBlogListApi arg = ', arg);
-          const result = await queryFulfilled;
-          // console.log('inside getMoreBlogListApi  result = ', result);
-          if (result?.data?.results?.length > 0) {
-            // console.log('inside getMoreBlogListApi  result.data.results = ', result.data.results);
-
-            // update blogList cache
-            dispatch(
-              apiSlice.util.updateQueryData(
-                'articlesPageFilterArticles',
-                arg.selectedTopic,
-                (draftState) => {
-                  // console.log('draftState = ', JSON.stringify(draftState));
-                  // console.log('draftState.results = ', JSON.stringify(draftState.results));
-                  draftState.results = [
-                    ...draftState.results,
-                    ...result.data.results,
-                  ];
-                }
-              )
-            );
-          }
-        } catch (error) {
-          //
-        }
-      },
-    }),
-
     articlesPagePopularArticles: builder.query({
       query: ({ limit, offset }) => ({
         url: `/blog/popular-blog-list/?limit=${limit}&offset=${offset}`,
       }),
-    }),
 
-    articlesPageMostLikesArticles: builder.query({
-      query: ({ limit, offset }) => ({
-        url: `/blog/popular-blog-list/?limit=${limit}&offset=${offset}`,
-      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          console.log("api calling");
+          const result = await queryFulfilled;
+          // console.log('inside authApi logout endpoint  result = ', result);
+          console.log("api called");
+        } catch (error) {
+          console.log("error = ", error);
+        }
+      },
     }),
   }),
 });
 
-export const {
-  useArticlesPageGetTopicsQuery,
-  useArticlesPageFilterArticlesQuery,
-  useArticlesPagePopularArticlesQuery,
-  useArticlesPageMostLikesArticlesQuery,
-} = ArticlesPageApi;
+export const { useArticlesPagePopularArticlesQuery } = ArticlesPageApi;

@@ -10,6 +10,8 @@ const PopularArticles = () => {
     { refetchOnMountOrArgChange: true }
   );
 
+  console.log(isLoading, isSuccess, data);
+
   if (isLoading) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-[15px] md:gap-y-[20px] gap-x-[30px] main-article-section">
