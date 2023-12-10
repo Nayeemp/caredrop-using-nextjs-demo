@@ -1,5 +1,10 @@
 import Articles from "./Articles";
 
+export const metadata = {
+  title: "Articles",
+  description: "This is Articles page",
+};
+
 export default function Home() {
   return (
     <>

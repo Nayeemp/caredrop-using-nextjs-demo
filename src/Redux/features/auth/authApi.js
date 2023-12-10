@@ -13,7 +13,7 @@ export const authApi = apiSlice.injectEndpoints({
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
-          console.log("inside authApi arg = ", arg);
+          // console.log("inside authApi arg = ", arg);
           const result = await queryFulfilled;
           // console.log("inside authApi  result = ", result);
 

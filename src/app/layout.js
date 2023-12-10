@@ -2,8 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/Components/Navbar/Navbar";
 import StoreProvider from "@/Redux/provider/StoreProvider.js";
-import useLocalPropertiesCheck from "@/Hook/useLocalPropertiesCheck";
-
+import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -14,21 +13,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en-US">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer"
-        />
-      </head>
       <body className={inter.className}>
         <StoreProvider>
           <Navbar />
           {children}
         </StoreProvider>
       </body>
+      <Script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" />
     </html>
   );
 }

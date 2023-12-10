@@ -1,14 +1,15 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import './ArticleCard.css';
+import React, { useEffect, useRef, useState } from "react";
+import "./ArticleCard.css";
 
-import moment from 'moment';
-import likeLogo from '../../../public/Assets/Components/Articles/like.svg';
-import liked from '../../../public/Assets/Components/Articles/liked.svg';
-import save from '../../../public/Assets/Components/Articles/save.svg';
-import saved from '../../../public/Assets/Components/Articles/saved.svg';
-import Image from 'next/image';
+import moment from "moment";
+import likeLogo from "../../../public/Assets/Components/Articles/like.svg";
+import liked from "../../../public/Assets/Components/Articles/liked.svg";
+import save from "../../../public/Assets/Components/Articles/save.svg";
+import saved from "../../../public/Assets/Components/Articles/saved.svg";
+import Image from "next/image";
+import Navigate from "@/helpers/Navigate";
 
 const nameSubstring = (name) => {
   if (name.length > 20) {
@@ -27,7 +28,7 @@ const cardDetailsTagHandler = (categoryTags) => {
             key={index}
             className="p-[5px] text-primary font-normal text-[0.688rem] sm:text-xs leading-[10px]  sm:leading-[14.32px] rounded bg-primary15 article-card-category-tag"
           >
-            {categoryItem?.name ? categoryItem.name : 'categoryTag'}
+            {categoryItem?.name ? categoryItem.name : "categoryTag"}
           </div>
         );
       }
@@ -46,6 +47,7 @@ const cardDetailsTagHandler = (categoryTags) => {
 };
 
 function ArticleCard({ cardDetails }) {
+  // console.log("cardDetails = ", cardDetails);
   const { author } = cardDetails;
 
   const isBookMarked = false;
@@ -58,17 +60,20 @@ function ArticleCard({ cardDetails }) {
 
   return (
     <div className="border-2 border-transparent hover:border-primary hover:rounded-[15px]">
-      <div className="bg-[#FFFFFF] rounded-xl ArticlesCardShadow ArticlesCardHeight flex overflow-hidden">
-        <div className="h-full aspect-[412/382] relative">
-          <Image
-            fill
-            src={cardDetails.post_image}
-            alt="corona"
-            className="h-full w-full object-cover rounded-xl"
-          />
+      <div className="rounded-xl ArticlesCardShadow ArticlesCardHeight flex overflow-hidden">
+        <div className="h-full aspect-[412/382] relative rounded-xl">
+          <Navigate href={`/articles/${cardDetails.id}`}>
+            <Image
+              fill
+              src={cardDetails.post_image}
+              alt="corona"
+              className="h-full w-full object-cover rounded-xl bg-[#FFFFFF] "
+            />
+          </Navigate>
+          <div className="absolute right-0 w-[10px] bg-[#FFFFFF] h-full z-[-1]"></div>
         </div>
 
-        <div className="p-2 sm:p-4 lg:p-5 flex flex-col justify-between h-full w-full">
+        <div className="p-2 sm:p-4 lg:p-5 flex flex-col justify-between h-full w-full bg-[#FFFFFF]">
           <div className="flex flex-row justify-between items-center mb-[2px] sm:mb-[7px]">
             <div className="flex flex-row flex-wrap gap-x-2 gap-y-2 justify-start items-center">
               {cardDetailsTagHandler(cardDetails.category)}
@@ -89,7 +94,9 @@ function ArticleCard({ cardDetails }) {
           <div
             className={`text-[0.688rem] sm:text-sm xl:text-base font-medium leading-[15.09px] sm:leading-[19.09px] mb-[2px] sm:mb-[7px] article-card-content`}
           >
-            {cardDetails.title}
+            <Navigate href={`/articles/${cardDetails.id}`}>
+              {cardDetails.title}
+            </Navigate>
           </div>
 
           <div className="flex justify-between items-center">
@@ -118,7 +125,7 @@ function ArticleCard({ cardDetails }) {
                 <div className="text-[0.65rem] sm:text-xs xl:text-sm font-normal text-primary leading-[12px] sm:leading-[14px] xl:leading-[16.71px] mb-0 sm:mb-[3px] article-card-author-name">
                   {author?.full_name
                     ? nameSubstring(author.full_name)
-                    : 'author'}
+                    : "author"}
                 </div>
 
                 <div className="flex items-center">
@@ -130,7 +137,7 @@ function ArticleCard({ cardDetails }) {
                     />
                   </div>
                   <div className="ml-1 text-[0.688rem] font-light text-[#757575] leading-[7.13px] sm:leading-[13.13px] article-card-like-count">
-                    ({cardDetails?.total_likes ? cardDetails.total_likes : '0'})
+                    ({cardDetails?.total_likes ? cardDetails.total_likes : "0"})
                   </div>
                 </div>
               </div>
@@ -140,7 +147,7 @@ function ArticleCard({ cardDetails }) {
               <div className="text-[0.625rem] xl:text-xs font-light text-[#757575] leading-[14.32px]">
                 {cardDetails?.published_at
                   ? moment(cardDetails.published_at).fromNow()
-                  : 'In Review'}
+                  : "In Review"}
               </div>
             </div>
           </div>

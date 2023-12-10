@@ -11,10 +11,10 @@ export const ArticlesPageApi = apiSlice.injectEndpoints({
 
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
-          console.log("api calling");
+          // console.log("api calling");
           const result = await queryFulfilled;
           // console.log('inside authApi logout endpoint  result = ', result);
-          console.log("api called");
+          // console.log("api called");
         } catch (error) {
           console.log("error = ", error);
         }
