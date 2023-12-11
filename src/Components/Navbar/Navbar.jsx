@@ -12,6 +12,7 @@ function Navbar() {
   const localPropertiesChecked = useLocalPropertiesCheck();
   const { accessToken } = useSelector((state) => state.auth);
   const [logout, { isSuccess, isLoading }] = useLogoutMutation();
+  //throw new Error("egew");
 
   const router = useRouter();
 

@@ -11,6 +11,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  // throw new Error("egew");
   return (
     <html lang="en-US">
       <body className={inter.className}>

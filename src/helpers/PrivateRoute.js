@@ -6,11 +6,10 @@ function PrivateRoute() {
   const router = useRouter();
   const { accessToken } = useSelector((state) => state?.auth);
 
-  if (accessToken) {
-    return <></>;
-  } else {
+  if (!accessToken) {
     return router.replace(`/login`);
   }
+  return <></>;
 }
 
 export default PrivateRoute;
