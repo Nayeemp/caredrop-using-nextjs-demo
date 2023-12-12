@@ -48,6 +48,7 @@ const cardDetailsTagHandler = (categoryTags) => {
 
 function ArticleCard({ cardDetails }) {
   // console.log("cardDetails = ", cardDetails);
+  const [imageLoadingStatus, setImageLoadingStatus] = useState(true);
   const { author } = cardDetails;
 
   const isBookMarked = false;
@@ -61,14 +62,37 @@ function ArticleCard({ cardDetails }) {
   return (
     <div className="border-2 border-transparent hover:border-primary hover:rounded-[15px]">
       <div className="rounded-xl ArticlesCardShadow ArticlesCardHeight flex overflow-hidden">
-        <div className="h-full aspect-[412/382] relative rounded-xl">
+        {/* <div
+          className={`h-full aspect-[412/382] relative rounded-xl ${
+            imageLoadingStatus ? "hidden" : "block"
+          }`}
+        >
           <Navigate href={`/articles/${cardDetails.id}`}>
             <Image
               fill
               src={cardDetails.post_image}
               alt="corona"
               className="h-full w-full object-cover rounded-xl bg-[#FFFFFF]"
-              // placeholder="blur"
+              onLoad={() => setImageLoadingStatus(false)}
+            />
+          </Navigate>
+          <div className="absolute right-0 w-[10px] bg-[#FFFFFF] h-full z-[-1]"></div>
+        </div> */}
+
+        {/* {imageLoadingStatus && (
+          <div className="flex justify-center items-center h-full w-auto aspect-[412/382]">
+            <div className="bg-gray-300 h-full w-full rounded-xl" />
+          </div>
+        )} */}
+
+        <div className={`h-full aspect-[412/382] relative rounded-xl`}>
+          <Navigate href={`/articles/${cardDetails.id}`}>
+            <Image
+              fill
+              src={cardDetails.post_image}
+              alt="corona"
+              className="h-full w-full object-cover rounded-xl bg-[#FFFFFF]"
+              onLoad={() => console.log("Image load completed")}
             />
           </Navigate>
           <div className="absolute right-0 w-[10px] bg-[#FFFFFF] h-full z-[-1]"></div>

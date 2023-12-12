@@ -5,8 +5,8 @@ import Image from "next/image";
 async function getData(blogId) {
   const res = await fetch(
     `https://caredrop.api-care-box.click/care-drop/v1/blog/blog-details/${blogId}/`,
-    //{ cache: "no-store" }
-    { next: { revalidate: 60 * 24 } }
+    { cache: "no-store" }
+    // { next: { revalidate: 60 * 24 } }
   ); // { next: { revalidate: value in second} }
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -40,6 +40,8 @@ const ArticlesDetailsPage = async ({ params }) => {
           src={data?.post_image ? data.post_image : captionImage}
           alt="captionImage"
           className="object-cover rounded-xl"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8/OVYPQAH/QL+9KZjmgAAAABJRU5ErkJggg=="
         />
       </div>
     </div>
