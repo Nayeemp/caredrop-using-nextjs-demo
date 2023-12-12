@@ -68,7 +68,8 @@ function ArticleCard({ cardDetails }) {
               src={cardDetails.post_image}
               alt="corona"
               className="h-full w-full object-cover rounded-xl bg-[#FFFFFF]"
-              // placeholder="blur"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8/OVYPQAH/QL+9KZjmgAAAABJRU5ErkJggg=="
             />
           </Navigate>
           <div className="absolute right-0 w-[10px] bg-[#FFFFFF] h-full z-[-1]"></div>

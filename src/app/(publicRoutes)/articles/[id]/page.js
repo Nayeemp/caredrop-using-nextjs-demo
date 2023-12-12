@@ -37,7 +37,7 @@ const ArticlesDetailsPage = async ({ params }) => {
       <div className="w-full bg-[#F3EBF3] rounded-xl aspect-[700/408] relative mt-[20px] sm:mt-[24px]">
         <Image
           fill
-          src={data?.post_image ? data.post_image : captionImage}
+          src={data.post_image}
           alt="captionImage"
           className="object-cover rounded-xl"
           placeholder="blur"
