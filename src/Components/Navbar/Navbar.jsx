@@ -51,6 +51,15 @@ function Navbar() {
         Articles
       </Link>
 
+      <Link
+        href="/iframe"
+        className={`py-3 px-5 hover:bg-gray-300 cursor-pointer border-x ${
+          pathname === "/iframe" && "bg-green-400"
+        }`}
+      >
+        iframe
+      </Link>
+
       <div
         onClick={() => navigate("/create-article")}
         className={`py-3 px-5 hover:bg-gray-300 cursor-pointer border-x ${

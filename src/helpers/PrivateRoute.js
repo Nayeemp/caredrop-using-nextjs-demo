@@ -1,15 +1,18 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 function PrivateRoute() {
   const router = useRouter();
   const { accessToken } = useSelector((state) => state?.auth);
 
-  if (!accessToken) {
-    return router.replace(`/login`);
-  }
-  return <></>;
+  //console.log(accessToken);
+  useEffect(() => {
+    if (!accessToken) {
+      return router.replace(`/login`);
+    }
+  }, []);
 }
 
 export default PrivateRoute;
