@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import "./AddWebsiteForm.css";
-import IframeModal from "./IframeModal2";
+import IframeModal from "./IframeModal";
 
 function AddWebsiteForm() {
   const [url, setUrl] = useState("");
@@ -41,13 +41,6 @@ function AddWebsiteForm() {
         </div>
       </div>
 
-      <button
-        className="fsubmitButton"
-        onClick={() => setShowModal(!showModal)}
-      >
-        modal button
-      </button>
-
       {/* {url && isSubmitted && (
         <div className="formContainer mt-5">
           <div className="mb-[40px]">
@@ -66,7 +59,7 @@ function AddWebsiteForm() {
         </div>
       )} */}
 
-      {/* {url && isSubmitted && (
+      {url && isSubmitted && (
         <IframeModal
           showModal={showModal}
           setShowModal={setShowModal}
@@ -74,9 +67,7 @@ function AddWebsiteForm() {
           setUrl={setUrl}
           setIsSubmitted={setIsSubmitted}
         />
-      )} */}
-
-      <IframeModal showModal={showModal} setShowModal={setShowModal} />
+      )}
     </>
   );
 }

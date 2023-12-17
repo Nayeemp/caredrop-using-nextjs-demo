@@ -12,7 +12,7 @@ function PrivateRoute() {
     if (!accessToken) {
       return router.replace(`/login`);
     }
-  }, []);
+  }, [accessToken]);
 }
 
 export default PrivateRoute;
